@@ -1,0 +1,15 @@
+[ormolu]
+src.github = "tweag/ormolu"
+src.use_latest_release = true
+fetch.url = "https://github.com/tweag/ormolu/releases/download/$ver/ormolu-Linux.zip"
+
+[hellsmack]
+src.github = "amesgen/hellsmack"
+src.use_latest_release = true
+src.prefix = "v"
+fetch.url = "https://github.com/amesgen/hellsmack/releases/download/v$ver/hellsmack-Linux.zip"
+
+[cabal-docspec]
+src.github_tag = "phadej/cabal-extras"
+src.prefix = "cabal-docspec-"
+fetch.url = "https://github.com/phadej/cabal-extras/releases/download/cabal-docspec-$ver/cabal-docspec-$ver.xz"
