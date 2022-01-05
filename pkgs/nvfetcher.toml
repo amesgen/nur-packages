@@ -13,3 +13,9 @@ fetch.url = "https://github.com/amesgen/hellsmack/releases/download/v$ver/hellsm
 src.github_tag = "phadej/cabal-extras"
 src.prefix = "cabal-docspec-"
 fetch.url = "https://github.com/phadej/cabal-extras/releases/download/cabal-docspec-$ver/cabal-docspec-$ver.xz"
+
+[hlint]
+src.github = "ndmitchell/hlint"
+src.use_latest_release = true
+src.prefix = "v"
+fetch.url = "https://github.com/ndmitchell/hlint/releases/download/v$ver/hlint-$ver-x86_64-linux.tar.gz"

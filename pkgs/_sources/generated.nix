@@ -17,6 +17,14 @@
       sha256 = "066a5fr69f48j99kvvgxwjj95sdjgy1y65ix693a3b9bqjsdhb70";
     };
   };
+  hlint = {
+    pname = "hlint";
+    version = "3.3.6";
+    src = fetchurl {
+      url = "https://github.com/ndmitchell/hlint/releases/download/v3.3.6/hlint-3.3.6-x86_64-linux.tar.gz";
+      sha256 = "00d1l48a4vc1aja77kkiq8j7fipr94hipdxd8vayzmn43f20dqfr";
+    };
+  };
   ormolu = {
     pname = "ormolu";
     version = "0.4.0.0";

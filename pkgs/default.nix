@@ -70,4 +70,21 @@ in
       platforms = [ "x86_64-linux" ];
     };
   };
+
+  hlint = pkgs.stdenv.mkDerivation rec {
+    inherit (nv.hlint) pname version src;
+    nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+    buildInputs = [ pkgs.gmp pkgs.ncurses5 ];
+    installPhase = ''
+      mkdir -p $out/bin
+      install -m755 -D hlint $out/bin/hlint
+    '';
+
+    meta = {
+      description = "Source code suggestions";
+      homepage = "https://github.com/ndmitchell/hlint";
+      license = lib.licenses.bsd3;
+      platforms = [ "x86_64-linux" ];
+    };
+  };
 }
