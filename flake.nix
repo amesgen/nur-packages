@@ -14,9 +14,18 @@
         inherit packages;
         checks.build =
           pkgs.linkFarmFromDrvs "amesgen-nur-packages" (lib.attrValues packages);
-        devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.nvfetcher ];
-        };
+        devShell =
+          let
+            nvfetcherCfg = (pkgs.formats.toml { }).generate "nvfetcher.toml" (import ./pkgs/nvfetcher.nix lib);
+            nvfetcher = pkgs.writeShellScriptBin "nvfetcher" ''
+              ${pkgs.nvfetcher}/bin/nvfetcher \
+                -o pkgs/_sources \
+                -c <(sed -e 's/"\(.*\)" =/\1 =/g' ${nvfetcherCfg})
+            '';
+          in
+          pkgs.mkShell {
+            buildInputs = [ nvfetcher ];
+          };
       }
     );
 }
