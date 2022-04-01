@@ -9,6 +9,14 @@
       sha256 = "12lgpv4g5lcv5b37crimbmd95n9w8fx45xf3dgncg7lckq6p0972";
     };
   };
+  cabal-docspec-man = {
+    pname = "cabal-docspec-man";
+    version = "0.0.0.20211114";
+    src = fetchurl {
+      url = "https://raw.githubusercontent.com/phadej/cabal-extras/cabal-docspec-0.0.0.20211114/cabal-docspec/cabal-docspec.1";
+      sha256 = "14km7fc906ww3hsd12g96z9fxbllh7lzrcsb3r2n08pcy0ql12h9";
+    };
+  };
   hellsmack = {
     pname = "hellsmack";
     version = "0.1.2.6";
