@@ -201,4 +201,31 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
         platforms = [ "x86_64-linux" ];
       };
     };
+
+  pandoc =
+    { lib
+    , stdenv
+    , installShellFiles
+    , unzip
+    }:
+
+    let inherit (nv.pandoc) pname version src; in
+
+    stdenv.mkDerivation {
+      inherit pname src version;
+      nativeBuildInputs = [ installShellFiles unzip ];
+      installPhase = ''
+        mkdir -p $out/bin
+        BIN=$out/bin/${pname}
+        install -m755 -D bin/pandoc "$BIN"
+      '';
+
+      meta = {
+        description = "Universal markup converter";
+        homepage = "https://pandoc.org/";
+        license = lib.licenses.gpl2Plus;
+        sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
+        platforms = [ "x86_64-linux" ];
+      };
+    };
 }
