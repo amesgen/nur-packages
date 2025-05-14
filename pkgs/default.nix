@@ -125,12 +125,14 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
     stdenv.mkDerivation rec {
       inherit (nv.fourmolu) pname version src;
       dontUnpack = true;
+      dontStrip = true;
       nativeBuildInputs = [ autoPatchelfHook installShellFiles ];
       buildInputs = [ gmp ];
       installPhase = ''
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
         install -m755 -D $src $BIN
+        autoPatchelf "$BIN"
         ${optparseApplicativeCompletions pname}
       '';
 
