@@ -5,9 +5,9 @@ let
   nv = pkgs.callPackage (import ./_sources/generated.nix) { };
   optparseApplicativeCompletions = pname: ''
     installShellCompletion --cmd ${pname} \
-      --bash <($BIN --bash-completion-script $BIN) \
-      --zsh  <($BIN --zsh-completion-script  $BIN) \
-      --fish <($BIN --fish-completion-script $BIN)
+      --bash <($BIN --bash-completion-script "$BIN") \
+      --zsh  <($BIN --zsh-completion-script  "$BIN") \
+      --fish <($BIN --fish-completion-script "$BIN")
   '';
 in
 lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
@@ -25,7 +25,7 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
         unzip ${src}
-        install -m755 -D ormolu $BIN
+        install -m755 -D ormolu "$BIN"
         ${optparseApplicativeCompletions pname}
       '';
 
@@ -51,7 +51,7 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
         unxz -c ${src} > cabal-docspec
-        install -m755 -D cabal-docspec $BIN
+        install -m755 -D cabal-docspec "$BIN"
         ${optparseApplicativeCompletions pname}
         installManPage ${nv.cabal-docspec-man.src}
       '';
@@ -102,7 +102,7 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
         unxz -c $src > ${pname}
-        install -m755 -D ${pname} $BIN
+        install -m755 -D ${pname} "$BIN"
         ${optparseApplicativeCompletions pname}
       '';
 
@@ -131,7 +131,7 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
       installPhase = ''
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
-        install -m755 -D $src $BIN
+        install -m755 -D $src "$BIN"
         autoPatchelf "$BIN"
         ${optparseApplicativeCompletions pname}
       '';
@@ -189,12 +189,12 @@ lib.mapAttrs (_: pkg: pkgs.callPackage pkg { }) {
       installPhase = ''
         mkdir -p $out/bin
         BIN=$out/bin/${pname}
-        install -m755 -D $src $BIN
+        install -m755 -D $src "$BIN"
         ${optparseApplicativeCompletions pname}
       '';
 
       meta = {
-        description = " Haskell-based shell scripting language ";
+        description = "Haskell-based shell scripting language";
         homepage = "https://chrisdone.github.io/hell";
         license = lib.licenses.bsd3;
         sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
